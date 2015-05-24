@@ -5,8 +5,11 @@ shinyUI(fluidPage(
         sidebarPanel( 
                 p("The binomial distribution takes two parameters:", 
                         
-                        tags$ul(tags$li("n - the number of trials")),
-                        tags$ul(tags$li("p - the probability of 'success' for each trial")),
+                  tags$ul(
+                          tags$li("n - the number of trials"), 
+                          tags$li('p - the probability of "success" for 
+                                             each trial')
+                  ),
                   
                    "If n is large and p is very small, the Poisson distribution with λ \u003D np can be 
                     used to approximate the binomial distribution. The larger the n and the smaller the p, 
