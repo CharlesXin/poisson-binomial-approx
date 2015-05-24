@@ -1,6 +1,8 @@
 shinyUI(fluidPage(
   titlePanel("Poisson Approximation to the Binomial Distribution"),
   
+  withMathJax(),
+  
   sidebarLayout(position = "left",
         sidebarPanel( 
                 p("The binomial distribution takes two parameters:", 
