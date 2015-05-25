@@ -34,7 +34,7 @@ shinyServer(function(input, output) {
                 ## make a matrix
                 M = matrix(c(n, p, prob.bin), nrow=3)
                 M = cbind(M, c(lambda, NA, prob.pois))
-                M = cbind(M, c("λ", "---", "---"))
+                M = cbind(M, c("Î»", "---", "---"))
                 
                 probName = paste0(paste("P(X", ineq.sign, a), ")")
                 rownames(M) = c("n", "p", probName)

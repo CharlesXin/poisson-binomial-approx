@@ -13,7 +13,7 @@ shinyUI(fluidPage(
                                              each trial')
                   ),
                   
-                   "If n is large and p is very small, the Poisson distribution with λ \u003D np can be 
+                   "If n is large and p is very small, the Poisson distribution with Î» \u003D np can be 
                     used to approximate the binomial distribution. The larger the n and the smaller the p, 
                     the better is the approximation. "),
                 
