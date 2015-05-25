@@ -69,25 +69,32 @@ shinyServer(function(input, output) {
                 big.size = element_text(size=13)
                 bold.text = element_text(face='bold')
                 
-                # auto adjust the range of the plot based on lambda: lambda +- 4*sqrt(lambda)
-                x=max(floor(lambda-4*sqrt(lambda)), 0):floor(lambda+4*sqrt(lambda))
+                # auto adjust the range of the plot based on lambda: 
+                # lambda +- 4*sqrt(lambda)
+                lwr = floor(lambda - 4 * sqrt(lambda))
+                upr = floor(lambda + 4 * sqrt(lambda))
+                x = max(lwr, 0) : upr
                 
                 # set n in stat_function
-                if (a>=floor(lambda+4*sqrt(lambda))) {
-                        num = length(x)+a-floor(lambda+4*sqrt(lambda))
-                } else if(a<floor(lambda-4*sqrt(lambda))) {
-                        num = length(x)+floor(lambda-4*sqrt(lambda))-a
+                if (a >= upr) {
+                        num = length(x) + a - upr
+                } else if(a < lwr) {
+                        num = length(x) + lwr - a
                 } else {
                         num = length(x) 
                 }
-                                                                                
-                plt = ggplot(transform(data.frame(x=x), y=dbinom(x, size=n, prob=p)), aes(x, y)) + 
-                      geom_bar(stat="identity", fill=hcl(h=195,l=65,c=100),color="black") +                       
-                      stat_function(geom = "line", fun=dpois, args=list(lambda = lambda), color=hcl(h=15,l=65,c=100), n=num, size=1.2) +
-                      theme_bw() + 
-                      theme(axis.text.x=big.size, axis.text.y=big.size, 
-                            title=bold.text) + 
-                      labs(x = "", y = "", title="Binomial Distribution with Possion Density Curve")
+                
+                dat = data.frame(x=x, y=dbinom(x, size=n, prob=p))
+                plt = ggplot(dat, aes(x, y)) + 
+                        geom_bar(stat="identity", fill=hcl(h=195,l=65,c=100),
+                                 color="black") +                       
+                        stat_function(geom = "line", fun=dpois, 
+                                      args=list(lambda = lambda), 
+                                      color=hcl(h=15,l=65,c=100), 
+                                      n=num, size=1.2) + theme_bw() + 
+                        theme(axis.text.x=big.size, axis.text.y=big.size, 
+                              title=bold.text) + 
+                        labs(x = "", y = "", title="Binomial Distribution with Possion Density Curve")
                 
                 ## add vertical line x=a
                 plt = plt + geom_vline(xintercept = a, color="darkblue", size=1.2)
